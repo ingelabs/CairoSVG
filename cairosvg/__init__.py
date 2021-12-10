@@ -22,8 +22,9 @@ else:
 VERSION = __version__ = (ROOT / 'VERSION').read_text().strip()
 
 
-# VERSION is used in the "url" module imported by "surface"
+# VERSION is used in the "url" module imported by "surface" and "parser"
 from . import surface  # noqa isort:skip
+from . import parser   # noqa isort:skip
 
 
 SURFACES = {
@@ -35,12 +36,16 @@ SURFACES = {
 }
 
 
-def svg2svg(bytestring=None, *, file_obj=None, url=None, dpi=96,
+def parse_svg(bytestring=None, *, file_obj=None, url=None):
+    return parser.Tree(bytestring=bytestring, file_obj=file_obj, url=url)
+
+
+def svg2svg(bytestring=None, *, file_obj=None, url=None, svg=None, dpi=96,
             parent_width=None, parent_height=None, scale=1, unsafe=False,
             background_color=None, negate_colors=False, invert_images=False,
             write_to=None, output_width=None, output_height=None, viewbox_id=None):
     return surface.SVGSurface.convert(
-        bytestring=bytestring, file_obj=file_obj, url=url, dpi=dpi,
+        bytestring=bytestring, file_obj=file_obj, url=url, svg=svg, dpi=dpi,
         parent_width=parent_width, parent_height=parent_height, scale=scale,
         background_color=background_color,
         negate_colors=negate_colors, invert_images=invert_images,
@@ -48,13 +53,13 @@ def svg2svg(bytestring=None, *, file_obj=None, url=None, dpi=96,
         output_height=output_height, viewbox_id=viewbox_id)
 
 
-def svg2png(bytestring=None, *, file_obj=None, url=None, dpi=96,
+def svg2png(bytestring=None, *, file_obj=None, url=None, svg=None, dpi=96,
             parent_width=None, parent_height=None, scale=1, unsafe=False,
             background_color=None, negate_colors=False, invert_images=False,
             write_to=None, output_width=None, output_height=None,
             viewbox_id=None):
     return surface.PNGSurface.convert(
-        bytestring=bytestring, file_obj=file_obj, url=url, dpi=dpi,
+        bytestring=bytestring, file_obj=file_obj, url=url, svg=svg, dpi=dpi,
         parent_width=parent_width, parent_height=parent_height, scale=scale,
         background_color=background_color, negate_colors=negate_colors,
         invert_images=invert_images, unsafe=unsafe, write_to=write_to,
@@ -62,13 +67,13 @@ def svg2png(bytestring=None, *, file_obj=None, url=None, dpi=96,
         viewbox_id=viewbox_id)
 
 
-def svg2pdf(bytestring=None, *, file_obj=None, url=None, dpi=96,
+def svg2pdf(bytestring=None, *, file_obj=None, url=None, svg=None, dpi=96,
             parent_width=None, parent_height=None, scale=1, unsafe=False,
             background_color=None, negate_colors=False, invert_images=False,
             write_to=None, output_width=None, output_height=None,
             viewbox_id=None):
     return surface.PDFSurface.convert(
-        bytestring=bytestring, file_obj=file_obj, url=url, dpi=dpi,
+        bytestring=bytestring, file_obj=file_obj, url=url, svg=svg, dpi=dpi,
         parent_width=parent_width, parent_height=parent_height, scale=scale,
         background_color=background_color, negate_colors=negate_colors,
         invert_images=invert_images, unsafe=unsafe, write_to=write_to,
@@ -76,13 +81,13 @@ def svg2pdf(bytestring=None, *, file_obj=None, url=None, dpi=96,
         viewbox_id=viewbox_id)
 
 
-def svg2ps(bytestring=None, *, file_obj=None, url=None, dpi=96,
+def svg2ps(bytestring=None, *, file_obj=None, url=None, svg=None, dpi=96,
            parent_width=None, parent_height=None, scale=1, unsafe=False,
            background_color=None, negate_colors=False, invert_images=False,
            write_to=None, output_width=None, output_height=None,
            viewbox_id=None):
     return surface.PSSurface.convert(
-        bytestring=bytestring, file_obj=file_obj, url=url, dpi=dpi,
+        bytestring=bytestring, file_obj=file_obj, url=url, svg=svg, dpi=dpi,
         parent_width=parent_width, parent_height=parent_height, scale=scale,
         background_color=background_color, negate_colors=negate_colors,
         invert_images=invert_images, unsafe=unsafe, write_to=write_to,
@@ -90,13 +95,13 @@ def svg2ps(bytestring=None, *, file_obj=None, url=None, dpi=96,
         viewbox_id=viewbox_id)
 
 
-def svg2eps(bytestring=None, *, file_obj=None, url=None, dpi=96,
+def svg2eps(bytestring=None, *, file_obj=None, url=None, svg=None, dpi=96,
             parent_width=None, parent_height=None, scale=1, unsafe=False,
             background_color=None, negate_colors=False, invert_images=False,
             write_to=None, output_width=None, output_height=None,
             viewbox_id=None):
     return surface.EPSSurface.convert(
-        bytestring=bytestring, file_obj=file_obj, url=url, dpi=dpi,
+        bytestring=bytestring, file_obj=file_obj, url=url, svg=svg, dpi=dpi,
         parent_width=parent_width, parent_height=parent_height, scale=scale,
         background_color=background_color, negate_colors=negate_colors,
         invert_images=invert_images, unsafe=unsafe, write_to=write_to,

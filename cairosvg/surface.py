@@ -95,7 +95,7 @@ class Surface(object):
     surface_class = None
 
     @classmethod
-    def convert(cls, bytestring=None, *, file_obj=None, url=None, dpi=96,
+    def convert(cls, bytestring=None, *, file_obj=None, url=None, svg=None, dpi=96,
                 parent_width=None, parent_height=None, scale=1, unsafe=False,
                 viewbox_id=None,
                 background_color=None, negate_colors=False,
@@ -108,6 +108,7 @@ class Surface(object):
         :param bytestring: The SVG source as a byte-string.
         :param file_obj: A file-like object.
         :param url: A filename.
+        :param tree: A SVG tree.
 
         Give some options:
 
@@ -128,9 +129,12 @@ class Surface(object):
         parameters are keyword-only.
 
         """
-        tree = Tree(
-            bytestring=bytestring, file_obj=file_obj, url=url, unsafe=unsafe,
-            **kwargs)
+        tree = svg
+        if not tree:
+            tree = Tree(
+                bytestring=bytestring, file_obj=file_obj, url=url, unsafe=unsafe,
+                **kwargs)
+
         output = write_to or io.BytesIO()
         instance = cls(
             tree, output, dpi, None, parent_width, parent_height, scale,
