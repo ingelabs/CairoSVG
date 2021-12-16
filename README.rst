@@ -1,3 +1,13 @@
+This is a fork of `the original CairoSVG project <https://github.com/Kozea/CairoSVG>`_ project.
+
+To install this version:
+
+.. code-block:: sh
+
+   $ pip install https://github.com/ingelabs/CairoSVG/archive/refs/heads/ingelabs.zip
+
+----
+
 CairoSVG is an SVG converter based on Cairo. It can export SVG files to PDF,
 EPS, PS, and PNG files.
 
