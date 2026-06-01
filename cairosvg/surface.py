@@ -108,7 +108,7 @@ class Surface(object):
         :param bytestring: The SVG source as a byte-string.
         :param file_obj: A file-like object.
         :param url: A filename.
-        :param tree: A SVG tree.
+        :param svg: An already parsed SVG tree.
 
         Give some options:
 
@@ -134,6 +134,8 @@ class Surface(object):
             tree = Tree(
                 bytestring=bytestring, file_obj=file_obj, url=url, unsafe=unsafe,
                 **kwargs)
+        else:
+            tree = copy.deepcopy(tree)
 
         output = write_to or io.BytesIO()
         instance = cls(
